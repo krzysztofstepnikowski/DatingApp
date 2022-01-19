@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DatingApp.UI.Pages.MeetLovePage"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns:viewModels="clr-namespace:DatingApp.Core.ViewModels.MeetLove;assembly=DatingApp.Core"
+    xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:resources="clr-namespace:DatingApp.UI.Resources.LocalizationResources"
+    xmlns:swipecardview="clr-namespace:MLToolkit.Forms.SwipeCardView;assembly=MLToolkit.Forms.SwipeCardView"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:behaviors="clr-namespace:DatingApp.UI.Behaviors"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:TypeArguments="viewModels:MeetLoveViewModel"
+    NavigationPage.HasNavigationBar="False"
+    NavigationPage.HasBackButton="False">
+        
+    <Grid xct:StateLayout.CurrentState="{Binding CurrentState}"
+          Padding="{OnPlatform Android='20,0,20,0', iOS='20,40,20,0'}" RowSpacing="20" RowDefinitions="Auto, Auto, *, Auto" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <xct:StateLayout.StateViews>
+            <xct:StateView StateKey="Loading">
+                <Label Text="{x:Static resources:AppResources.Loading}"
+                       Style="{StaticResource PopinsSemiBoldBlack20}"
+                       Grid.Row="2"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"/>
+            </xct:StateView>
+            <xct:StateView StateKey="Error">
+                <Label Text="{x:Static resources:AppResources.Error}"
+                       Style="{StaticResource PopinsSemiBoldBlack20}"
+                       Grid.Row="2"
+                       VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="CenterAndExpand"/>
+            </xct:StateView>
+        </xct:StateLayout.StateViews>
+        <Grid.Background>
+            <LinearGradientBrush
+                             EndPoint="0,1">
+                <GradientStop Color="#fff1f4"
+                              Offset="0.5"/>
+                <GradientStop Color="#ffffff"
+                              Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <!--Header-->
+        <StackLayout Grid.Row="0" Orientation="Horizontal" Spacing="12">
+            <forms:SvgCachedImage Source="{StaticResource SvgIconSidebar}"
+                                    WidthRequest="24"
+                                    HeightRequest="24"/>
+            <Label Text="{x:Static resources:AppResources.MeetLove}"
+                   TextColor="{StaticResource PrimaryColor}"
+                   FontFamily="Poppins-Bold"
+                   FontSize="18"
+                   VerticalOptions="Center"/>
+
+            <StackLayout HorizontalOptions="EndAndExpand" Orientation="Horizontal"
+                            Spacing="12">
+
+                <forms:SvgCachedImage Source="{StaticResource SvgIconNotification}"
+                                        WidthRequest="24"
+                                        HeightRequest="24"/>
+                <forms:SvgCachedImage Source="{StaticResource SvgIconProfile}"
+                                        WidthRequest="36"
+                                        HeightRequest="36"/>
+            </StackLayout>
+
+        </StackLayout>
+
+        <!--Avatars collection-->
+        <CollectionView ItemsSource="{Binding Avatars}"
+                        ItemsLayout="HorizontalList"
+                        Grid.Row="1"
+                        HeightRequest="65"
+                        HorizontalScrollBarVisibility="Never">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="8,0">
+                        <Ellipse HorizontalOptions="Center"
+                                 VerticalOptions="Center"
+                                 WidthRequest="62"
+                                 HeightRequest="62"
+                                 Stroke="#FD397F"
+                                 StrokeThickness="1"
+                                 Fill="White"/>
+                        <Image HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               WidthRequest="60"
+                               HeightRequest="60"        
+                               Source="{Binding .}">
+                            <Image.Clip>
+                                <EllipseGeometry Center="30,30"
+                                                 RadiusX="30"
+                                                 RadiusY="30"/>
+                            </Image.Clip>
+                        </Image>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--Center content-->
+        <swipecardview:SwipeCardView ItemsSource="{Binding Users}"
+                                     SupportedSwipeDirections="Left,Right"
+                                     Grid.Row="2"
+                                     x:Name="SwipeCardView">
+            <swipecardview:SwipeCardView.ItemTemplate>
+                <DataTemplate>
+                    <Frame WidthRequest="320"
+                           HeightRequest="497"
+                           HasShadow="False"
+                           Margin="0"
+                           Padding="0"
+                           CornerRadius="40"
+                           BackgroundColor="#C4C4C4"
+                           IsClippedToBounds="True">
+
+                        <!--Photo and Identity-->
+                        <Grid RowDefinitions="*, Auto, Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding OpenProfileCommand}" CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Image Grid.Row="0" Grid.RowSpan="3"
+                                   Source="{Binding ImageUrl}"
+                                   Aspect="AspectFill"
+                                   VerticalOptions="FillAndExpand"
+                                   HorizontalOptions="FillAndExpand"/>
+
+                            <forms:SvgCachedImage Source="{StaticResource SvgIconHeart}"
+                                                  Grid.Row="0"
+                                                  WidthRequest="36"
+                                                  HeightRequest="36"
+                                                  HorizontalOptions="EndAndExpand"
+                                                  VerticalOptions="StartAndExpand"
+                                                  Margin="0,20,20,0"
+                                                  IsVisible="{Binding IsFavorite}"/>
+
+                            <Frame Grid.Row="2"
+                                   BackgroundColor="White"
+                                    CornerRadius="20"
+                                    HasShadow="False"
+                                    VerticalOptions="EndAndExpand"
+                                    Opacity="0.9"
+                                    Padding="20"
+                                    Margin="0,0,0,20">
+
+                                <Grid RowDefinitions="Auto, *" ColumnDefinitions="*, Auto">
+                                    <StackLayout Orientation="Vertical" Spacing="8" Grid.Row="0" Grid.Column="0">
+
+                                        <StackLayout Orientation="Horizontal" Spacing="4">
+
+                                            <Label Text="{Binding Name}"
+                                                   TextColor="Black"
+                                                   FontFamily="Poppins-SemiBold"
+                                                   FontSize="14"/>
+                                            <forms:SvgCachedImage Source="{StaticResource SvgIconCircleCheckFill}"
+                                                                   WidthRequest="16"
+                                                                   HeightRequest="16"/>
+
+                                        </StackLayout>
+
+                                        <StackLayout Orientation="Horizontal" Spacing="4">
+
+                                            <forms:SvgCachedImage Source="{StaticResource SvgIconLocation}"
+                                                                   WidthRequest="12"
+                                                                   HeightRequest="12"/>
+                                            <Label Text="Jakarta, Indonesia"
+                                                   TextColor="Black"
+                                                   FontFamily="Poppins-Medium"
+                                                   FontSize="10"/>
+
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <forms:SvgCachedImage Source="{StaticResource SvgIconCircleArrow}"
+                                                          WidthRequest="32"
+                                                          HeightRequest="32"
+                                                          Grid.Row="0"
+                                                          Grid.RowSpan="2"
+                                                          Grid.Column="1"
+                                                          VerticalOptions="CenterAndExpand"/>
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </swipecardview:SwipeCardView.ItemTemplate>
+        </swipecardview:SwipeCardView>
+
+        <!--Buttons (Close, Like, Star)-->
+        <StackLayout Margin="0,20" Grid.Row="3" Orientation="Horizontal" Spacing="12" HorizontalOptions="CenterAndExpand">
+
+            <Frame Style="{StaticResource CircleFrameStyle}"
+                       ios:VisualElement.IsShadowEnabled="true"
+                       ios:VisualElement.ShadowColor="LightGray"
+                       ios:VisualElement.ShadowOpacity="0.7"
+                       ios:VisualElement.ShadowRadius="12">
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="CloseTapGestureRecognizer_Tapped"/>
+                </Frame.GestureRecognizers>
+
+                <forms:SvgCachedImage Source="{StaticResource SvgIconClose}"
+                                          Style="{StaticResource CircleSvgCachedImageStyle}"/>
+
+            </Frame>
+
+            <forms:SvgCachedImage Source="{StaticResource SvgIconLike}"
+                                              WidthRequest="86"
+                                              HeightRequest="86">
+
+                <forms:SvgCachedImage.Behaviors>
+                    <behaviors:ViewTappedButtonBehavior AnimationType="Scale"/>
+                </forms:SvgCachedImage.Behaviors>
+                <forms:SvgCachedImage.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="LikeTapGestureRecognizer_Tapped"/>
+                </forms:SvgCachedImage.GestureRecognizers>
+            </forms:SvgCachedImage>
+
+            <Frame Style="{StaticResource CircleFrameStyle}"
+                   ios:VisualElement.IsShadowEnabled="true"
+                   ios:VisualElement.ShadowColor="LightGray"
+                   ios:VisualElement.ShadowOpacity="0.7"
+                   ios:VisualElement.ShadowRadius="12">
+
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="StarTapGestureRecognizer_Tapped"/>
+                </Frame.GestureRecognizers>
+
+                <forms:SvgCachedImage Source="{StaticResource SvgIconStar}"
+                                      Style="{StaticResource CircleSvgCachedImageStyle}"/>
+            </Frame>
+        </StackLayout>
+
+    </Grid>
+</views:MvxContentPage>

@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="DatingApp.UI.Resources.Styles">
+
+    <Style x:Key="CircleFrameStyle" TargetType="{x:Type Frame}">
+        <Setter Property="CornerRadius"
+                    Value="43"/>
+        <Setter Property="HasShadow"
+                    Value="True"/>
+        <Setter Property="WidthRequest"
+                    Value="86"/>
+        <Setter Property="HeightRequest"
+                    Value="86"/>
+        <Setter Property="Padding"
+                Value="0"/>
+        <Setter Property="Margin"
+                Value="0"/>
+        <Setter Property="IsClippedToBounds"
+                Value="True"/>
+    </Style>
+
+    <Style x:Key="CircleSvgCachedImageStyle" TargetType="{x:Type forms:SvgCachedImage}">
+        <Setter Property="WidthRequest"
+                    Value="74"/>
+        <Setter Property="HeightRequest"
+                    Value="74"/>
+        <Setter Property="VerticalOptions"
+                Value="CenterAndExpand"/>
+    </Style>
+
+    <Style x:Key="PopinsSemiBoldBlack14" TargetType="{x:Type Label}">
+        <Setter Property="FontFamily"
+                    Value="Poppins-SemiBold"/>
+        <Setter Property="FontSize"
+                    Value="14"/>
+        <Setter Property="TextColor"
+                Value="Black"/>
+    </Style>
+
+    <Style x:Key="PopinsSemiBoldBlack20" TargetType="{x:Type Label}">
+        <Setter Property="FontFamily"
+                    Value="Poppins-SemiBold"/>
+        <Setter Property="FontSize"
+                    Value="20"/>
+        <Setter Property="TextColor"
+                Value="Black"/>
+    </Style>
+
+</ResourceDictionary>

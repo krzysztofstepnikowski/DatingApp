@@ -1,0 +1,18 @@
+﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="DatingApp.UI.Resources.Icons"
+                    xmlns:local="clr-namespace:DatingApp.UI.Resources">
+
+    <x:String x:Key="SvgIconCircleArrow">resource://DatingApp.UI.Resources.Svg.circle_arrow.svg</x:String>
+    <x:String x:Key="SvgIconBack">resource://DatingApp.UI.Resources.Svg.back.svg</x:String>
+    <x:String x:Key="SvgIconCircleCheckFill">resource://DatingApp.UI.Resources.Svg.circle_check_fill.svg</x:String>
+    <x:String x:Key="SvgIconClose">resource://DatingApp.UI.Resources.Svg.close.svg</x:String>
+    <x:String x:Key="SvgIconLike">resource://DatingApp.UI.Resources.Svg.like.svg</x:String>
+    <x:String x:Key="SvgIconLocation">resource://DatingApp.UI.Resources.Svg.location.svg</x:String>
+    <x:String x:Key="SvgIconHeart">resource://DatingApp.UI.Resources.Svg.heart.svg</x:String>
+    <x:String x:Key="SvgIconProfile">resource://DatingApp.UI.Resources.Svg.profile.svg</x:String>
+    <x:String x:Key="SvgIconNotification">resource://DatingApp.UI.Resources.Svg.notification.svg</x:String>
+    <x:String x:Key="SvgIconSidebar">resource://DatingApp.UI.Resources.Svg.sidebar.svg</x:String>
+    <x:String x:Key="SvgIconStar">resource://DatingApp.UI.Resources.Svg.star.svg</x:String>
+
+</ResourceDictionary>

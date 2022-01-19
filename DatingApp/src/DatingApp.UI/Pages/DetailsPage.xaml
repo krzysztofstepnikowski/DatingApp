@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage
+ xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:DatingApp.Core.ViewModels.DetailsProfile;assembly=DatingApp.Core"
+    xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    xmlns:resources="clr-namespace:DatingApp.UI.Resources.LocalizationResources"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    x:TypeArguments="viewModels:DetailProfileViewModel"
+    x:Class="DatingApp.UI.Pages.DetailsPage"
+    NavigationPage.HasNavigationBar="False">
+
+    <ScrollView>
+            <Grid RowDefinitions="Auto, Auto, Auto, Auto, *" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Grid.Background>
+            <LinearGradientBrush
+                             EndPoint="0,1">
+                <GradientStop Color="#fff1f4"
+                              Offset="0.5"/>
+                <GradientStop Color="#ffffff"
+                              Offset="1.0"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+        <Image Source="photo.png"
+               Grid.Row="0"
+               WidthRequest="375"
+               HeightRequest="375"
+               Aspect="Fill"    
+               HorizontalOptions="FillAndExpand"/>
+
+        <forms:SvgCachedImage Source="{StaticResource SvgIconBack}"
+                              WidthRequest="37"
+                              HeightRequest="37"
+                              Grid.Row="0"
+                              VerticalOptions="StartAndExpand"
+                              HorizontalOptions="StartAndExpand"
+                              Margin="20,40,0,0">
+            <forms:SvgCachedImage.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding BackCommand}"/>
+            </forms:SvgCachedImage.GestureRecognizers>
+        </forms:SvgCachedImage>
+
+         <!--Buttons (Close, Like, Star)-->
+        <StackLayout Margin="0,-50,0,0" Grid.Row="1" Orientation="Horizontal" Spacing="12" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand">
+
+            <Frame Style="{StaticResource CircleFrameStyle}"
+                   HasShadow="False"
+                   ios:VisualElement.IsShadowEnabled="true"
+                   ios:VisualElement.ShadowColor="LightGray"
+                   ios:VisualElement.ShadowOpacity="0.3"
+                   ios:VisualElement.ShadowRadius="4">
+
+                <forms:SvgCachedImage Source="{StaticResource SvgIconClose}"
+                                          Style="{StaticResource CircleSvgCachedImageStyle}"/>
+
+            </Frame>
+
+            <forms:SvgCachedImage Source="{StaticResource SvgIconLike}"
+                                              WidthRequest="86"
+                                              HeightRequest="86"/>
+
+
+            <Frame Style="{StaticResource CircleFrameStyle}"
+                   HasShadow="False"
+                   ios:VisualElement.IsShadowEnabled="True"
+                   ios:VisualElement.ShadowColor="LightGray"
+                   ios:VisualElement.ShadowOpacity="0.3"
+                   ios:VisualElement.ShadowRadius="4">
+
+                <forms:SvgCachedImage Source="{StaticResource SvgIconStar}"
+                                      Style="{StaticResource CircleSvgCachedImageStyle}"/>
+            </Frame>
+        </StackLayout>
+
+         <!--Photo and Identity-->
+        <StackLayout Orientation="Vertical" Spacing="8" Grid.Row="2" Margin="8,0,0,0">
+
+            <StackLayout Orientation="Horizontal" Spacing="4">
+
+                <Label Text="{Binding UserDetails.Name}"
+                       TextColor="Black"
+                       FontFamily="Poppins-SemiBold"
+                       FontSize="20"/>
+                <forms:SvgCachedImage Source="{StaticResource SvgIconCircleCheckFill}"
+                                        WidthRequest="24"
+                                        HeightRequest="24"/>
+
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Spacing="4">
+
+                <forms:SvgCachedImage Source="{StaticResource SvgIconLocation}"
+                                        WidthRequest="16"
+                                        HeightRequest="16"/>
+                <Label Text="Jakarta, Indonesia"
+                       TextColor="Black"
+                       FontFamily="Poppins-Medium"
+                       FontSize="14"/>
+
+            </StackLayout>
+        </StackLayout>
+
+        <!--About-->
+        <StackLayout Orientation="Vertical" Spacing="12" Grid.Row="3" Margin="10,0,0,0">
+            <Label Text="{x:Static resources:AppResources.About}"
+                    Style="{StaticResource PopinsSemiBoldBlack14}"/>
+            <Label Text="{x:Static resources:AppResources.LoremIpsum}"
+                   TextColor="Black"
+                   FontSize="10"
+                   FontFamily="Poppins-Regular"/>
+        </StackLayout>
+
+        <!--Interest-->
+        <StackLayout Orientation="Vertical" Spacing="12" Grid.Row="4" Margin="10,0">
+            <Label Text="{x:Static resources:AppResources.Interest}"
+                   Style="{StaticResource PopinsSemiBoldBlack14}"/>
+
+            <FlexLayout Direction="Row"
+                        AlignContent="Start"
+                        AlignItems="Start"
+                        JustifyContent="Start"
+                        Wrap="Wrap"
+                        BindableLayout.ItemsSource="{Binding Hobbies}">  
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame CornerRadius="20"
+                                               HasShadow="False"
+                                               HeightRequest="24"
+                                               Padding="8"
+                                               BackgroundColor="{Binding Hex}"
+                                               FlexLayout.AlignSelf="Start"
+                                               Margin="0,0,4,8">
+                                                    <Label Text="{Binding Name}"
+                                                           HorizontalTextAlignment="Center"
+                                                           VerticalTextAlignment="Center"
+                                                           TextColor="White"
+                                                           FontFamily="Poppins-SemiBold"
+                                                           FontSize="10"/>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+        </StackLayout>
+    </Grid>
+    </ScrollView>
+
+</views:MvxContentPage>

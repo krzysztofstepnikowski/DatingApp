@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<views:MvxContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="DatingApp.UI.Pages.MenuPage"
+    xmlns:viewModels="clr-namespace:DatingApp.Core.ViewModels.Menu;assembly=DatingApp.Core"
+    xmlns:views="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+    x:TypeArguments="viewModels:MenuViewModel"
+    IconImageSource="Sidebar.png">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ListView ItemsSource="{Binding MenuItemList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</views:MvxContentPage>
