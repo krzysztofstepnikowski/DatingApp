@@ -1,4 +1,3 @@
-using System;
 using System.Collections.ObjectModel;
 using MvvmCross.Navigation;
 using MvvmCross.ViewModels;
