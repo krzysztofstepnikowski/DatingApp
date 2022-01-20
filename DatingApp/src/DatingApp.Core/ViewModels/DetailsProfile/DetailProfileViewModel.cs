@@ -64,7 +64,7 @@ namespace DatingApp.Core.ViewModels.DetailsProfile
         {
             base.ViewAppeared();
             UserDetails = _userDetails;
-            Hobbies = InitialHobbies();
+            Hobbies = InitializeHobbies();
         }
 
         private async Task BackAsync()
@@ -72,7 +72,7 @@ namespace DatingApp.Core.ViewModels.DetailsProfile
             await _navigationService.Close(this);
         }
 
-        private List<Hobby> InitialHobbies()
+        private List<Hobby> InitializeHobbies()
         {
             var hobbies = _hobbiesProvider.GetHobbies();
 
